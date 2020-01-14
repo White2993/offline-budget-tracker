@@ -10,7 +10,7 @@ module.exports = function(app) {
   app.post("/api/budget", (req, res) => {
     Budget.create(req.body)
       .then(db => {
-        res.json(db);
+        res.send(db);
       })
       .catch(err => {
         res.json(err);

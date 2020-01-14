@@ -1,8 +1,11 @@
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
-  "/assets/js/app.js",
-  "/assets/js/indexedDb.js"
+  "./dist/bundle.js",
+  "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css",
+  "https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js",
+  "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js",
+  "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 ];
 
 

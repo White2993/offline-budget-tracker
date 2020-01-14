@@ -20,9 +20,8 @@ mongoose.connect("mongodb://localhost/budget", {
   useFindAndModify: false
 });
 
-// routes here
-require('./Develop/routes/htmlRoutes.js')
-require('./Develop/routes/apiRoutes.js')(app)
+require('./routes/htmlRoutes.js')
+require('./routes/apiRoutes.js')(app)
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);

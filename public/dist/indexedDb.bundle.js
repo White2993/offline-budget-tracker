@@ -81,22 +81,10 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./public/assets/js/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./public/assets/js/indexedDb.js");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./public/assets/js/app.js":
-/*!*********************************!*\
-  !*** ./public/assets/js/app.js ***!
-  \*********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _indexedDb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./indexedDb */ \"./public/assets/js/indexedDb.js\");\n\n\nconst priceEl = document.getElementById(\"price\");\nconst balanceEl = document.getElementById(\"balance\");\nconst expenseEl = document.getElementById(\"expense-deposit\");\nconst expensesListEl = document.getElementById(\"expenses-list\");\nconst submitBtn = document.getElementById(\"submit\");\nconst resetBtn = document.getElementById(\"reset\");\n\nfunction sub(a, b) {\n  return parseInt(a) + parseInt(b)\n};\n\nObject(_indexedDb__WEBPACK_IMPORTED_MODULE_0__[\"useIndexedDb\"])(\"budget\", \"budgetStore\", \"get\").then(results => {\n  console.log(results)\n  results.forEach(o => {\n    console.log(o)\n    const oneItem = `<li class=\"list-group-item\">Name: ${o.name}\n    <span class=\"ml-4\">Price: ${o.value}</span></li>`;\n    $(\"#expenses-list\").append(oneItem)\n    const newOne = sub(balanceEl.innerHTML, o.value);\n    balanceEl.innerHTML = newOne;\n  });\n});\n\n\n$(function () {\n  //on expense\n  $(\"#expense\").on(\"click\", function (e) {\n    e.preventDefault();\n    let newItem = {\n      item: $(\"#expense-deposit\").val().trim(),\n      price: \"-\"+$(\"#price\").val().trim()\n    };\n\n    Object(_indexedDb__WEBPACK_IMPORTED_MODULE_0__[\"useIndexedDb\"])(\"budget\", \"budgetStore\", \"put\", {\n      _id: newItem.item,\n      name: newItem.item,\n      value: newItem.price\n    });\n\n    $.ajax(\"/api/budget\", {\n      type: \"POST\",\n      data: newItem\n    }).then(\n      function () {\n        location.reload();\n      }\n    );\n  });\n  //on deposite\n  $(\"#deposit\").on(\"click\", function (e) {\n    e.preventDefault();\n    let newItem = {\n      item: $(\"#expense-deposit\").val().trim(),\n      price: $(\"#price\").val().trim()\n    };\n\n    Object(_indexedDb__WEBPACK_IMPORTED_MODULE_0__[\"useIndexedDb\"])(\"budget\", \"budgetStore\", \"put\", {\n      _id: newItem.item,\n      name: newItem.item,\n      value: newItem.price\n    });\n\n    $.ajax(\"/api/budget\", {\n      type: \"POST\",\n      data: newItem\n    }).then(\n      function () {\n        location.reload();\n      }\n    );\n  });\n\n  //on reset\n  $(\"#reset\").on(\"click\", function (e) {\n    e.preventDefault();\n    Object(_indexedDb__WEBPACK_IMPORTED_MODULE_0__[\"useIndexedDb\"])(\"budget\", \"budgetStore\", \"clear\")\n    $.ajax(\"/api/budget\", {\n      type: \"DELETE\",\n    });\n    location.reload();\n  });\n});\n\n\n//# sourceURL=webpack:///./public/assets/js/app.js?");
-
-/***/ }),
 
 /***/ "./public/assets/js/indexedDb.js":
 /*!***************************************!*\
